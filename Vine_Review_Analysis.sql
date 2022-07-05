@@ -102,3 +102,8 @@ SELECT Round(((SELECT 1.0*five_star_vines_yes.count FROM five_star_vines_yes) /
 SELECT Round(((SELECT 1.0*five_star_vines_no.count FROM five_star_vines_no) /
         (SELECT total_count_vines_no.count FROM total_count_vines_no) * 100),2) 
 		as percentage;	
+
+-- Additional Analysis - weighted average by vine type
+SELECT vine, SUM(star_rating * total_votes) / SUM(total_votes) AS avgratingbyvinetype
+FROM relevant_vines_v2
+GROUP BY vine
